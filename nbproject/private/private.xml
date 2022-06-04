@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/ihm/Client.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/assets/style/scss/_variables.scss</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/model/ClientModel.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/client.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/templates/header.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/assets/style/scss/_shared.scss</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/templates/pagination.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/produit.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/dao/ProduitDAO.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/dao/ClientDAO.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/ihm/Produit.java</file>
+        </group>
+    </open-files>
+</project-private>
