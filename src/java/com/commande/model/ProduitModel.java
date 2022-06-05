@@ -57,6 +57,7 @@ public class ProduitModel {
     public void setPrixU(int prixU) {
         this.prixU = prixU;
     }
+
     public int getStock() {
         return stock;
     }

@@ -15,6 +15,7 @@ import javax.servlet.RequestDispatcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
+import org.json.*;
 
 import com.commande.dao.DAOContext;
 import com.commande.dao.ClientDAO;
@@ -32,33 +33,49 @@ public class Client extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            listClient(request, response);
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
+        if (request.getParameter("action") != null) {
+            String action = request.getParameter("action");
+            try {
+                switch (action) {
+                    case "Selectionner":
+                        selectClient(request, response);
+                        break;
+                    default:
+                        listAllClient(request, response);
+                        break;
+                }
+            } catch (SQLException ex) {
+                throw new ServletException(ex);
+            }
+        } else {
+            try {
+                listAllClient(request, response);
+            } catch (SQLException ex) {
+                throw new ServletException(ex);
+            }
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("submitClient");
+        String action = request.getParameter("submit");
         try {
             switch (action) {
-                case "ajouter":
+                case "Ajouter":
                     addClient(request, response);
                     break;
-                case "modifier":
+                case "Modifier":
                     updateClient(request, response);
                     break;
-                case "supprimer":
+                case "Supprimer":
                     deleteClient(request, response);
                     break;
-                case "chercher":
-                    // chercheClient(request, response);
+                case "Chercher":
+                    // searchClient(request, response);
                     break;
                 default:
-                    listClient(request, response);
+                    listAllClient(request, response);
                     break;
             }
         } catch (SQLException ex) {
@@ -66,7 +83,7 @@ public class Client extends HttpServlet {
         }
     }
 
-    private void listClient(HttpServletRequest request, HttpServletResponse response)
+    private void listAllClient(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
 
         int page = 1;
@@ -90,6 +107,14 @@ public class Client extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/client.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void selectClient(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int num = Integer.parseInt(request.getParameter("numClient"));
+        JSONObject selectedClient = new JSONObject(ClientDAO.selectClient(num));
+        response.setContentType("application/json");
+        response.getWriter().write(selectedClient.toString());
     }
 
     private void addClient(HttpServletRequest request, HttpServletResponse response)

@@ -9,8 +9,9 @@ import com.commande.model.ProduitModel;
 public class ProduitDAO extends DAOContext {
 
     private static final String SELECT_ALL_PRODUITS = "SELECT * FROM Produit ORDER BY numProduit ASC";
+    private static final String SELECT_PRODUIT_BY_ID = "SELECT * FROM Produit WHERE numProduit = ?";
     private static final String INSERT_PRODUIT = "INSERT INTO Produit (idProduit, designProduit, puProduit, stockProduit) VALUES (?,?,?,?)";
-    private static final String UPDATE_PRODUIT = "UPDATE Produit set idProduit = ?, designProduit = ?, puProduit = ?, stockProduit = ? WHERE numClient = ?";
+    private static final String UPDATE_PRODUIT = "UPDATE Produit set idProduit = ?, designProduit = ?, puProduit = ?, stockProduit = ? WHERE numProduit = ?";
     private static final String DELETE_PRODUIT = "DELETE FROM Produit WHERE numProduit = ?";
 
     private int noOfRecords;
@@ -38,6 +39,29 @@ public class ProduitDAO extends DAOContext {
         return produits;
     }
 
+    public static ProduitModel selectProduit(int numProduit) {
+        ProduitModel produit = null;
+        try (Connection connection = DriverManager.getConnection(dbURL, dbLogin, dbPassword)) {
+            try (PreparedStatement statement = connection.prepareStatement(SELECT_PRODUIT_BY_ID)) {
+
+                statement.setInt(1, numProduit);
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    int num = rs.getInt("numProduit");
+                    String id = rs.getString("idProduit");
+                    String designation = rs.getString("designProduit");
+                    int prixU = rs.getInt("puProduit");
+                    int stock = rs.getInt("stockProduit");
+                    produit = new ProduitModel(num, id, designation, prixU, stock);
+                }
+            }
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+        return produit;
+    }
+
     public static void addProduit(ProduitModel produit) {
 
         try (Connection connection = DriverManager.getConnection(dbURL, dbLogin, dbPassword)) {
@@ -63,8 +87,8 @@ public class ProduitDAO extends DAOContext {
 
                 statement.setString(1, produit.getId());
                 statement.setString(2, produit.getDesignation());
-                statement.setInt(3, produit.getStock());
-                statement.setInt(4, produit.getPrixU());
+                statement.setInt(3, produit.getPrixU());
+                statement.setInt(4, produit.getStock());
                 statement.setInt(5, produit.getNum());
                 rowUpdated = statement.executeUpdate() > 0;
             }

@@ -7,6 +7,7 @@ package com.commande.ihm;
 import com.commande.dao.DAOContext;
 import com.commande.dao.ProduitDAO;
 import com.commande.model.ProduitModel;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.*;
 
 @WebServlet(name = "Produit", urlPatterns = {"/produit"})
 public class Produit extends HttpServlet {
@@ -31,33 +33,49 @@ public class Produit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            listProduit(request, response);
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
+        if (request.getParameter("action") != null) {
+            String action = request.getParameter("action");
+            try {
+                switch (action) {
+                    case "Selectionner":
+                        selectProduit(request, response);
+                        break;
+                    default:
+                        listAllProduit(request, response);
+                        break;
+                }
+            } catch (SQLException ex) {
+                throw new ServletException(ex);
+            }
+        } else {
+            try {
+                listAllProduit(request, response);
+            } catch (SQLException ex) {
+                throw new ServletException(ex);
+            }
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("submitProduit");
+        String action = request.getParameter("submit");
         try {
             switch (action) {
-                case "ajouter":
+                case "Ajouter":
                     addProduit(request, response);
                     break;
-                case "modifier":
+                case "Modifier":
                     updateProduit(request, response);
                     break;
-                case "supprimer":
+                case "Supprimer":
                     deleteProduit(request, response);
                     break;
-                case "chercher":
-                    // chercheProduit(request, response);
+                case "Chercher":
+                    // searchProduit(request, response);
                     break;
                 default:
-                    listProduit(request, response);
+                    listAllProduit(request, response);
                     break;
             }
         } catch (SQLException ex) {
@@ -65,7 +83,7 @@ public class Produit extends HttpServlet {
         }
     }
 
-    private void listProduit(HttpServletRequest request, HttpServletResponse response)
+    private void listAllProduit(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
 
         int page = 1;
@@ -89,6 +107,14 @@ public class Produit extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/produit.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void selectProduit(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        int num = Integer.parseInt(request.getParameter("numProduit"));
+        JSONObject selectedProduit = new JSONObject(ProduitDAO.selectProduit(num));
+        response.setContentType("application/json");
+        response.getWriter().write(selectedProduit.toString());
     }
 
     private void addProduit(HttpServletRequest request, HttpServletResponse response)
