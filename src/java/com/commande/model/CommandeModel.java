@@ -2,19 +2,30 @@ package com.commande.model;
 
 public class CommandeModel {
 
+    private int numCommande;
     private int numClient;
-    private int numProduit;
-    private int quantite;
     private String date;
 
     public CommandeModel() {
     }
 
-    public CommandeModel(int numClient, int numProduit, int quantite, String date) {
+    public CommandeModel(int numClient, String date) {
         this.numClient = numClient;
-        this.numProduit = numProduit;
-        this.quantite = quantite;
         this.date = date;
+    }
+
+    public CommandeModel(int numCommande, int numClient, String date) {
+        this.numCommande = numCommande;
+        this.numClient = numClient;
+        this.date = date;
+    }
+
+    public int getNumCommande() {
+        return numCommande;
+    }
+
+    public void setNumCommande(int numCommande) {
+        this.numCommande = numCommande;
     }
 
     public int getNumClient() {
@@ -23,22 +34,6 @@ public class CommandeModel {
 
     public void setNumclient(int numClient) {
         this.numClient = numClient;
-    }
-
-    public int getNumProduit() {
-        return numProduit;
-    }
-
-    public void setNumProduit(int numProduit) {
-        this.numProduit = numProduit;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
     }
 
     public String getDate() {

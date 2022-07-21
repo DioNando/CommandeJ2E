@@ -5,11 +5,17 @@ import java.util.List;
 import java.sql.*;
 
 import com.commande.model.CommandeModel;
+import com.commande.model.AvoirModel;
+import com.commande.model.ProduitModel;
+import com.commande.model.ClientModel;
 
 public class CommandeDAO extends DAOContext {
 
     private static final String SELECT_ALL_COMMANDES = "SELECT * FROM Commande";
-    private static final String INSERT_COMMANDE = "INSERT INTO Commande (numClient, numProduit, quantite, dateCommande) VALUES (?,?,?,?)";
+    private static final String INSERT_COMMANDE = "INSERT INTO Commande (numClient, dateCommande) VALUES (?,?)";
+    private static final String INSERT_AVOIR = "INSERT INTO Avoir (numCommande, numProduit, quantite) VALUES (?,?,?)";
+    private static final String UPDATE_QUANTITE_PRODUIT = "";
+    private static final String SELECT_LAST_ID = "SELECT MAX(numCommande) AS lastID FROM Commande";
 
     public static List< CommandeModel> selectAllCommandes() {
         List< CommandeModel> commandes = new ArrayList<>();
@@ -20,11 +26,10 @@ public class CommandeDAO extends DAOContext {
                 ResultSet rs = statement.executeQuery();
 
                 while (rs.next()) {
+                    int numCommande = rs.getInt("numCommande");
                     int numClient = rs.getInt("numClient");
-                    int numProduit = rs.getInt("numProduit");
-                    int quantite = rs.getInt("quantite");
                     String date = rs.getString("dateCommande");
-                    commandes.add(new CommandeModel(numClient, numProduit, quantite, date));
+                    commandes.add(new CommandeModel(numCommande, numClient, date));
                 }
             }
         } catch (Exception exception) {
@@ -33,21 +38,26 @@ public class CommandeDAO extends DAOContext {
         return commandes;
     }
 
-    public static void addCommande(CommandeModel commande) {
-
+    public static String addCommande(CommandeModel commande) {
+        String lastID = null;
         try (Connection connection = DriverManager.getConnection(dbURL, dbLogin, dbPassword)) {
             try (PreparedStatement statement = connection.prepareStatement(INSERT_COMMANDE)) {
 
                 statement.setInt(1, commande.getNumClient());
-                statement.setInt(2, commande.getNumProduit());
-                statement.setInt(3, commande.getQuantite());
-                statement.setString(4, commande.getDate());
+                statement.setString(2, commande.getDate());
                 statement.executeUpdate();
+            }
+            try (PreparedStatement statement = connection.prepareStatement(SELECT_LAST_ID)) {
 
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    lastID = rs.getString("lastID");
+                }
+                return (lastID);
             }
         } catch (Exception exception) {
             throw new RuntimeException(exception);
         }
-
     }
 }

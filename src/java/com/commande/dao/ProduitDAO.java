@@ -10,6 +10,7 @@ public class ProduitDAO extends DAOContext {
 
     private static final String SELECT_ALL_PRODUITS = "SELECT * FROM Produit ORDER BY numProduit ASC";
     private static final String SELECT_PRODUIT_BY_ID = "SELECT * FROM Produit WHERE numProduit = ?";
+    private static final String SEARCH_PRODUIT_BY_KEYWORD = "SELECT * FROM Produit WHERE CONCAT(idProduit,' ', numProduit, ' ', designProduit) LIKE ?";
     private static final String INSERT_PRODUIT = "INSERT INTO Produit (idProduit, designProduit, puProduit, stockProduit) VALUES (?,?,?,?)";
     private static final String UPDATE_PRODUIT = "UPDATE Produit set idProduit = ?, designProduit = ?, puProduit = ?, stockProduit = ? WHERE numProduit = ?";
     private static final String DELETE_PRODUIT = "DELETE FROM Produit WHERE numProduit = ?";
@@ -39,12 +40,58 @@ public class ProduitDAO extends DAOContext {
         return produits;
     }
 
+    public static List< ProduitModel> selectAllProduitsNoPagination() {
+        List< ProduitModel> produits = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(dbURL, dbLogin, dbPassword)) {
+            try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUITS)) {
+
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    int num = rs.getInt("numProduit");
+                    String id = rs.getString("idProduit");
+                    String designation = rs.getString("designProduit");
+                    int prixU = rs.getInt("puProduit");
+                    int stock = rs.getInt("stockProduit");
+                    produits.add(new ProduitModel(num, id, designation, prixU, stock));
+                }
+            }
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+        return produits;
+    }
+
     public static ProduitModel selectProduit(int numProduit) {
         ProduitModel produit = null;
         try (Connection connection = DriverManager.getConnection(dbURL, dbLogin, dbPassword)) {
             try (PreparedStatement statement = connection.prepareStatement(SELECT_PRODUIT_BY_ID)) {
 
                 statement.setInt(1, numProduit);
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    int num = rs.getInt("numProduit");
+                    String id = rs.getString("idProduit");
+                    String designation = rs.getString("designProduit");
+                    int prixU = rs.getInt("puProduit");
+                    int stock = rs.getInt("stockProduit");
+                    produit = new ProduitModel(num, id, designation, prixU, stock);
+                }
+            }
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+        return produit;
+    }
+
+    public static ProduitModel searchProduit(String keyword) {
+        ProduitModel produit = null;
+        try (Connection connection = DriverManager.getConnection(dbURL, dbLogin, dbPassword)) {
+            try (PreparedStatement statement = connection.prepareStatement(SEARCH_PRODUIT_BY_KEYWORD)) {
+
+                statement.setString(1, "%" + keyword + "%");
                 ResultSet rs = statement.executeQuery();
 
                 while (rs.next()) {

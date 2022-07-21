@@ -8,8 +8,8 @@
         <script src="assets/js/jquery.min.js" type="text/javascript"></script>
         <script src="assets/js/bootstrap/bootstrap.bundle.js" type="text/javascript"></script>
     </head>
-    <body>
-        <header class="container-fluid text-center text-primary bg-light text-dark p-3">
+    <body class="">
+        <header class="container-fluid text-center text-primary text-light p-3">
             <div class="d-flex align-items-center justify-content-between p-0">
                 <%
                     if (Boolean.valueOf(String.valueOf(session.getAttribute("isLogging")))) {
@@ -59,7 +59,7 @@
                         <a class="nav-link py-0 text-center px-lg-3 px-0" href="/CommandeJ2E/commande">Commandes</a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center justify-content-center position-relative bg-primary p-1 rounded-circle">
+                <div class="d-flex align-items-center justify-content-center position-relative bg-light p-1 rounded-circle">
                     <img src="assets/img/user.svg" width="25" height="25"/>  
                 </div>
                 <%

@@ -6,14 +6,14 @@
     <div class="row">
         <section class="col-12 col-lg-4 p-lg-4 p-2 pe-lg-3">
             <form class="bg-light text-dark rounded p-4 mb-4" method="post" action="client">
-                <label for="inputSearch" class="form-label fs-5 text-primary">Recherche d'un client</label>
+                <label for="inputSearch" class="form-label fs-5 text-success">Recherche d'un client</label>
                 <div class="d-flex">
                     <input type="search" id="inputSearch" class="form-control">
-                    <input type="submit" id="submit" value="Chercher" name="submit" class="flex-fill btn btn-primary ms-3">
+                    <input type="submit" id="submit" value="Chercher" name="submit" class="flex-fill btn btn-success ms-3">
                 </div>
             </form>
             <form class="bg-light text-dark p-4 rounded" method="post" autocomplete="off">
-                <h3 class="text-primary">Ajout d'un nouveau client</h3>
+                <h3 class="text-success">Ajout d'un nouveau client</h3>
                 <div class="d-flex flex-column">
                     <label class="my-2 form-label" for="idClient">Identification</label>
                     <input class="my-2 form-control" type="text" name="idClient" id="idClient" required>
@@ -22,9 +22,9 @@
                     <label class="my-2 form-label" for="nomClient">Nom du client</label>
                     <input class="my-2 form-control" type="text" name="nomClient" id="nomClient" required>
                 </div>
-                <div class="d-flex justify-content-evenly mt-3 mb-1">
-                    <input type="reset" id="reset" value="Effacer" name="reset" class="flex-fill btn btn-outline-secondary me-2">
-                    <input type="submit" id="submit" value="Ajouter" name="submit" formaction="client" class="flex-fill btn btn-primary ms-2">
+                <div class="d-flex justify-content-end mt-3 mb-1">
+                    <input type="reset" id="reset" value="Effacer" name="reset" class="btn btn-outline-secondary me-2">
+                    <input type="submit" id="submit" value="Ajouter" name="submit" formaction="client" class="btn btn-success ms-2">
                 </div>
             </form>
         </section>

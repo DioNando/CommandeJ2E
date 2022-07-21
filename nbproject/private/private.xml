@@ -3,14 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/ihm/Client.java</file>
             <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/templates/modalClient.jsp</file>
-            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/model/ClientModel.java</file>
-            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/templates/header.jsp</file>
-            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/client.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/ihm/ClientChiffreAffaire.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/dao/CommandeDAO.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/commande.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/dao/AvoirDAO.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/model/ProduitModel.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/ihm/Commande.java</file>
             <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/dao/ProduitDAO.java</file>
             <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/web/WEB-INF/produit.jsp</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/model/CommandeModel.java</file>
             <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/dao/ClientDAO.java</file>
+            <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/model/AvoirModel.java</file>
             <file>file:/C:/Users/Fernando%20David/Documents/NetBeansProjects/CommandeJ2E/src/java/com/commande/ihm/Produit.java</file>
         </group>
     </open-files>

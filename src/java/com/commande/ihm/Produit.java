@@ -40,6 +40,9 @@ public class Produit extends HttpServlet {
                     case "Selectionner":
                         selectProduit(request, response);
                         break;
+                    case "Chercher":
+                        searchProduit(request, response);
+                        break;
                     default:
                         listAllProduit(request, response);
                         break;
@@ -113,6 +116,14 @@ public class Produit extends HttpServlet {
             throws SQLException, IOException, ServletException {
         int num = Integer.parseInt(request.getParameter("numProduit"));
         JSONObject selectedProduit = new JSONObject(ProduitDAO.selectProduit(num));
+        response.setContentType("application/json");
+        response.getWriter().write(selectedProduit.toString());
+    }
+
+    private void searchProduit(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        String keyword = request.getParameter("idProduit");
+        JSONObject selectedProduit = new JSONObject(ProduitDAO.searchProduit(keyword));
         response.setContentType("application/json");
         response.getWriter().write(selectedProduit.toString());
     }

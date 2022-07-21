@@ -6,16 +6,16 @@
     <div class="row">
         <section class="col-12 col-lg-4 p-lg-4 p-2 pe-lg-3">
             <form class="bg-light text-dark rounded p-4 mb-4" method="post" action="produit">
-                <label for="inputSearch" class="form-label fs-5 text-primary">Recherche d'un produit</label>
+                <label for="inputSearch" class="form-label fs-5 text-success">Recherche d'un produit</label>
                 <div class="d-flex">
                     <input type="search" id="inputSearch" class="form-control">
-                    <input type="submit" id="submit" value="Chercher" name="submitProduit" class="flex-fill btn btn-primary ms-3">
+                    <input type="submit" id="submit" value="Chercher" name="submitProduit" class="flex-fill btn btn-success ms-3">
                 </div>
             </form>
             <form class="bg-light text-dark p-4 rounded" method="post" autocomplete="off">
-                <h3 class="text-primary">Ajout d'un nouveau produit</h3>
+                <h3 class="text-success">Ajout d'un nouveau produit</h3>
                 <div class="d-flex flex-column">
-                    <label class="my-2 form-label" for="idClient">Identification</label>
+                    <label class="my-2 form-label" for="idProduit">Identification</label>
                     <input class="my-2 form-control" type="text" name="idProduit" id="idProduit" required>
                 </div>
                 <div class="d-flex flex-column">
@@ -24,17 +24,17 @@
                 </div>
                 <div class="d-flex justify-content-evenly">
                     <div class="flex-fill d-flex flex-column me-2">
-                        <label class="my-2 form-label" for="nomClient">Prix Unitaire (Ar)</label>
+                        <label class="my-2 form-label" for="puProduit">Prix Unitaire (Ar)</label>
                         <input class="my-2 form-control" type="number" name="puProduit" id="puProduit" min="0" required>
                     </div>
                     <div class="flex-fill d-flex flex-column ms-2">
-                        <label class="my-2 form-label" for="nomClient">Stock</label>
+                        <label class="my-2 form-label" for="stockProduit">Stock</label>
                         <input class="my-2 form-control" type="number" name="stockProduit" id="stockProduit" value="0" min="0">
                     </div>
                 </div>
-                <div class="d-flex justify-content-evenly mt-3 mb-1">
-                    <input type="reset" id="reset" value="Effacer" name="reset" class="flex-fill btn btn-outline-secondary me-2">
-                    <input type="submit" id="submit" value="Ajouter" name="submit" formaction="produit" class="flex-fill btn btn-primary ms-2">
+                <div class="d-flex justify-content-end mt-3 mb-1">
+                    <input type="reset" id="reset" value="Effacer" name="reset" class="btn btn-outline-secondary me-2">
+                    <input type="submit" id="submit" value="Ajouter" name="submit" formaction="produit" class="btn btn-success ms-2">
                 </div>
 
             </form>
